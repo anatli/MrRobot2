@@ -20,7 +20,7 @@ public class Genetics {
 	myGenes[2] = new IntegerGene(conf, 0, 8); // range
 	myGenes[3] = new IntegerGene(conf, 0, 8); // speed
 	
-	IChromosome sampleChromosome = new Chromosome(conf, myGenes);
+	Chromosome sampleChromosome = new Chromosome(conf, myGenes);
 	conf.setSampleChromosome(sampleChromosome);
 	
 	conf.setPopulationSize(12);
@@ -28,8 +28,7 @@ public class Genetics {
 	
 	for (int i = 0; i < MAX_EVOLUTIONS; i++) {
 		System.out.println("Generation: " + i);
-		IChromosome ch=Population.getFittestChromosome();
-		System.out.println(ch.getGene(0)+" "+ch.getGene(1)+ch.getGene(2));
+		System.out.println(Population.toString());
 		Population.evolve();
 		System.out.println(Population.getFittestChromosome().toString());
 	}
