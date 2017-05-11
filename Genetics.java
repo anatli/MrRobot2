@@ -32,8 +32,6 @@ public class Genetics {
 		Population.evolve();
 		System.out.println(Population.getFittestChromosome().toString());
 	}
-	
-	IChromosome mostFitChromosome = Population.getFittestChromosome();		
-}
+	}
 	
 }

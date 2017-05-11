@@ -28,10 +28,10 @@ public class MyFitnessFunction extends FitnessFunction{
 		double fitness=0;
 		PrintWriter pw;
 		try {
-			String path="C:\\Users\\Asus\\workspace\\GeneticAlgorithm\\values.txt";
-			pw = new PrintWriter(new FileOutputStream(path,false));
+			String path="C:\\Users\\Asus\\workspace\\MyRobots\\bin\\atl\\SuperTracker.data\\values.txt";
+			pw = new PrintWriter(path);
 			for (int i = 0; i < a_subject.size(); i++) {
-			pw.append(a_subject.getGene(i).getAllele().toString()+" ");
+			pw.write(a_subject.getGene(i).getAllele().toString()+" ");
 			}
 			pw.close();
 			fitness=battle(a_subject);
@@ -48,15 +48,15 @@ public class MyFitnessFunction extends FitnessFunction{
 		 new RobocodeEngine(new java.io.File("C:/robocode"));
 		 // Run from C:/Robocode
 		 // Show the Robocode battle view
-		 engine.setVisible(false);
+		 engine.setVisible(true);
 		 // Create the battlefield
 		 int NumPixelRows=64*10; // 10 tiles of 64 pixels
 		 int NumPixelCols=64*10;
 		 BattlefieldSpecification battlefield = new BattlefieldSpecification(NumPixelRows, NumPixelCols);
 		 // 800x600
 		 // Setup battle parameters
-		 int numberOfRounds = 10;
-		 long inactivityTime = 8000;
+		 int numberOfRounds = 5;
+		 long inactivityTime = 5000;
 		 double gunCoolingRate = 1.0;
 		 int sentryBorderSize = 50;
 		 boolean hideEnemyNames = false;
@@ -83,9 +83,6 @@ public class MyFitnessFunction extends FitnessFunction{
 		 // Cleanup our RobocodeEngine
 		 engine.close();
 		 // Make sure that the Java VM is shut down properly
-//		 Scanner sc=new Scanner(new File("C:\\Users\\Asus\\workspace\\GeneticAlgorithm\\score.txt"));
-//		 double scoree=Double.parseDouble(sc.next());
-//		 sc.close();
 		 double scoree =BattleObserver.score;
 		 System.out.println(scoree);
 		return scoree;

@@ -1,13 +1,8 @@
-package GenAlg;
+package atl;
 
 import robocode.*;
 import java.awt.*;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.util.ArrayList;
 import java.util.Random;
 import java.util.Scanner;
 
@@ -22,12 +17,12 @@ public class SuperTracker extends AdvancedRobot {
 	 * run:  Tracker's main run function
 	 */
 	private Random rnd= new Random(0);
-	private int closeDistanceToEnemy;
-	private double probToChangeSpeed;
-	private int speedRange;
-	private int minSpeed;
+	private int closeDistanceToEnemy=150;
+	private double probToChangeSpeed=0.1;
+	private int speedRange=8;
+	private int minSpeed=8;
 	
-	public void run() {
+	public void run(){
 		setValues();
 		setAdjustRadarForRobotTurn(true);//keep the radar still while we turn
 		setBodyColor(new Color(128, 128, 50));
@@ -43,11 +38,8 @@ public class SuperTracker extends AdvancedRobot {
 	 */
 	public void onScannedRobot(ScannedRobotEvent e) {
 		double absBearing=e.getBearingRadians()+getHeadingRadians();//enemies absolute bearing
-		
 		double latVel=e.getVelocity() * Math.sin(e.getHeadingRadians() -absBearing);//enemies later velocity
-		
 		double gunTurnAmt;//amount to turn our gun
-		
 		setTurnRadarLeftRadians(getRadarTurnRemainingRadians());//lock on the radar
 		
 		if(Math.random()<=probToChangeSpeed){
@@ -71,9 +63,9 @@ public class SuperTracker extends AdvancedRobot {
 		}	
 	}
 	public void setValues(){
-		try (Scanner reader = new Scanner(this.getDataFile("C:\\Users\\Asus\\workspace\\GeneticAlgorithm\\values.txt"))) {
+		try (Scanner reader = new Scanner(this.getDataFile("values.txt"))) {
 			closeDistanceToEnemy = Integer.parseInt(reader.next());
-			probToChangeSpeed = Double.parseDouble(reader.next());
+			probToChangeSpeed = (double)Double.parseDouble(reader.next());
 			speedRange = Integer.parseInt(reader.next());
 			minSpeed = Integer.parseInt(reader.next());
 			reader.close();
@@ -93,19 +85,4 @@ public class SuperTracker extends AdvancedRobot {
 			turnLeft(30);
 		}
 	}
-//
-//	public void onBattleEnded(BattleEndedEvent event){
-//		double score=event.getResults().getScore();
-//		PrintWriter pw;
-//		try {
-//			String path="C:\\Users\\Asus\\workspace\\GeneticAlgorithm\\score.txt";
-//			pw = new PrintWriter(new FileOutputStream(path,false));
-//			pw.print(((Double)score).toString());
-//			
-//		pw.close();
-//		} catch (FileNotFoundException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}	
-//	}
 }
